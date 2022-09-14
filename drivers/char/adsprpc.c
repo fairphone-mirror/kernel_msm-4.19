@@ -482,8 +482,8 @@ struct fastrpc_file {
 	uint32_t ws_timeout;
 	/* To indicate attempt has been made to allocate memory for debug_buf */
 	int debug_buf_alloced_attempted;
-       /* Flag to indicate dynamic process creation status*/
-       bool in_process_create;
+	/* Flag to indicate dynamic process creation status*/
+        bool in_process_create;
 };
 
 static struct fastrpc_apps gfa;
