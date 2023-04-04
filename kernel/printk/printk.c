@@ -58,6 +58,14 @@
 #include "braille.h"
 #include "internal.h"
 
+//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com start
+enum console_sta{
+	console_open = 0,
+	console_close = 1,
+};
+bool console_enabled_userspace = console_open;
+//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com end
+
 int console_printk[4] = {
 	CONSOLE_LOGLEVEL_DEFAULT,	/* console_loglevel */
 	MESSAGE_LOGLEVEL_DEFAULT,	/* default_message_loglevel */
@@ -1747,6 +1755,10 @@ static void call_console_drivers(const char *ext_text, size_t ext_len,
 
 	trace_console_rcuidle(text, len);
 
+	//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com start
+	if (console_enabled_userspace >= console_close)
+		return;
+	//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com end
 	if (!console_drivers)
 		return;
 
@@ -2181,6 +2193,13 @@ static int __init console_setup(char *str)
 	idx = simple_strtoul(s, NULL, 10);
 	*s = 0;
 
+	//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com start
+	if(!strcmp(buf,"ttyHSL") && (idx == 0))
+		console_enabled_userspace = console_close;
+
+	pr_err("Minns---buf=[%s]idx=[%d]options=[%s]flag=[%d]\n"
+		,buf ,idx ,options ,console_enabled_userspace);
+	//FP4S-945 Enable uart log in user variant tianwen.zhang@t2mobile.com end
 	__add_preferred_console(buf, idx, options, brl_options);
 	console_set_on_cmdline = 1;
 	return 1;
