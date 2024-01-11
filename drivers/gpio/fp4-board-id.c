@@ -18,11 +18,11 @@ static ssize_t hw_version_show(struct class *class,
 	int id0=-1,id1=-1,id2=-1;
 
 	id0=gpio_get_value(board_id0_gpio);
-	pr_err(" %s board_id0 return is=%d ", __func__,id0);
+	//pr_err(" %s board_id0 return is=%d ", __func__,id0);
 	id1=gpio_get_value_cansleep(board_id1_gpio);
-	pr_err(" %s board_id1 return is=%d ", __func__,id1);
+	//pr_err(" %s board_id1 return is=%d ", __func__,id1);
 	id2=gpio_get_value_cansleep(board_id2_gpio);
-	pr_err(" %s board_id2 return is=%d ", __func__,id2);
+	//pr_err(" %s board_id2 return is=%d ", __func__,id2);
 
 	hw_version_status =
 				(id0 << 0) |
