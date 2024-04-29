@@ -14,12 +14,13 @@
 
 &qupv3_se10_i2c {
 	//qcom,clk-freq-out = <1000000>;
-        status = "ok";
-        pixelworks@26 {  //i2c: 22, i3c: 26
-                status = "ok";
-                compatible = "pixelworks,iris";
-                reg = <0x26>;
-        };
+	status = "ok";
+
+	pixelworks@26 { //i2c: 22, i3c: 26
+		status = "ok";
+		compatible = "pixelworks,iris";
+		reg = <0x26>;
+	};
 };
 
 &tlmm {
@@ -124,7 +125,7 @@
 
 &dsi_hx83112a_auo_1080_video {
 	qcom,mdss-dsi-display-timings {
-		timing@0{
+		timing@0 {
 			pxlw,iris-lightup-config = <&mdss_iris_cfg_hx83112a_auo_fhd_60fps_video>;
 		};
 	};
