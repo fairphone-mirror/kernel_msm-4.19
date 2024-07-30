@@ -4420,7 +4420,7 @@ int __init dev_proc_init(void);
 #define dev_proc_init() 0
 #endif
 
-static inline netdev_tx_t __netdev_start_xmit(const struct net_device_ops *ops,
+static inline __nocfi netdev_tx_t __netdev_start_xmit(const struct net_device_ops *ops,
 					      struct sk_buff *skb, struct net_device *dev,
 					      bool more)
 {

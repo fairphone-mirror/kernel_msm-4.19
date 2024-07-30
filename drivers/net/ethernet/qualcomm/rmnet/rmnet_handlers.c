@@ -107,7 +107,7 @@ EXPORT_SYMBOL(rmnet_shs_skb_entry_wq);
 /* Generic handler */
 
 void
-rmnet_deliver_skb(struct sk_buff *skb, struct rmnet_port *port)
+__nocfi rmnet_deliver_skb(struct sk_buff *skb, struct rmnet_port *port)
 {
 	int (*rmnet_shs_stamp)(struct sk_buff *skb, struct rmnet_port *port);
 	struct rmnet_priv *priv = netdev_priv(skb->dev);
