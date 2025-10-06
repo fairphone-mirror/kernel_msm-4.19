@@ -515,15 +515,6 @@ config DM_VERITY_HASH_PREFETCH_MIN_SIZE
 	  performance with increased memory consumption for keeping more hashes
 	  in RAM.
 
-config DM_VERITY_AVB
-	tristate "Support AVB specific verity error behavior"
-	depends on DM_VERITY
-	---help---
-	  Enables Android Verified Boot platform-specific error
-	  behavior. In particular, it will modify the vbmeta partition
-	  specified on the kernel command-line when non-transient error
-	  occurs (followed by a panic).
-
 config DM_VERITY_FEC
 	bool "Verity forward error correction support"
 	depends on DM_VERITY
@@ -604,25 +595,6 @@ config DM_ZONED
 
 	  If unsure, say N.
 
-config DM_ANDROID_VERITY
-	bool "Android verity target support"
-	depends on BLK_DEV_DM=y
-	depends on DM_VERITY=y
-	depends on X509_CERTIFICATE_PARSER
-	depends on SYSTEM_TRUSTED_KEYRING
-	depends on CRYPTO_RSA
-	depends on KEYS
-	depends on ASYMMETRIC_KEY_TYPE
-	depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-	select DM_VERITY_HASH_PREFETCH_MIN_SIZE_128
-	---help---
-	  This device-mapper target is virtually a VERITY target. This
-	  target is setup by reading the metadata contents piggybacked
-	  to the actual data blocks in the block device. The signature
-	  of the metadata contents are verified against the key included
-	  in the system keyring. Upon success, the underlying verity
-	  target is setup.
-
 config DM_ANDROID_VERITY_AT_MOST_ONCE_DEFAULT_ENABLED
 	bool "Verity will validate blocks at most once"
 	depends on DM_VERITY
@@ -668,5 +640,4 @@ config DM_USER
 	  called dm-user.
 
 	  If unsure, say N.
-
 endif # MD
