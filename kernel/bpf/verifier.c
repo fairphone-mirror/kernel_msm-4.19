@@ -3024,7 +3024,7 @@ static int __check_stack_boundary(struct bpf_verifier_env *env, u32 regno,
 				  int off, int access_size,
 				  bool zero_size_allowed)
 {
-	struct bpf_reg_state *reg = cur_regs(env) + regno;
+	struct bpf_reg_state *reg = reg_state(env, regno);
 
 	if (off >= 0 || off < -MAX_BPF_STACK || off + access_size > 0 ||
 	    access_size < 0 || (access_size == 0 && !zero_size_allowed)) {
