@@ -1973,6 +1973,7 @@ static int check_stack_write(struct bpf_verifier_env *env,
 	} else if (reg && is_spillable_regtype(reg->type)) {
 		/* register containing pointer is being spilled into stack */
 		if (size != BPF_REG_SIZE) {
+			verbose_linfo(env, insn_idx, "; ");
 			verbose(env, "invalid size of register spill\n");
 			return -EACCES;
 		}
@@ -2040,6 +2041,7 @@ static int check_stack_read(struct bpf_verifier_env *env,
 	if (stype[0] == STACK_SPILL) {
 		if (size != BPF_REG_SIZE) {
 			if (reg->type != SCALAR_VALUE) {
+				verbose_linfo(env, env->insn_idx, "; ");
 				verbose(env, "invalid size of register fill\n");
 				return -EACCES;
 			}
